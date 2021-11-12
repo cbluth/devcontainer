@@ -1,0 +1,24 @@
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "build": {
+        "args": {
+            "CUSER": "${localEnv:USER}",
+        },
+        "dockerfile": "dev.Dockerfile",
+    },
+    "postStartCommand": "sudo chmod ug+rw /var/run/docker.sock",
+    "remoteUser": "${localEnv:USER}",
+    "workspaceFolder": "/home/${localEnv:USER}/dev/${localWorkspaceFolderBasename}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/${localEnv:USER}/dev/${localWorkspaceFolderBasename},type=bind,consistency=delegated",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        "source=/Users/${localEnv:USER}/.aws,target=/home/${localEnv:USER}/.aws,type=bind",
+        "source=/Users/${localEnv:USER}/.kube,target=/home/${localEnv:USER}/.kube,type=bind",
+    ],
+    "settings": {
+        "#terminal.integrated.defaultProfile.linux#": "/bin/bash",
+    },
+    "extensions": [
+		"golang.go"
+	],
+}
